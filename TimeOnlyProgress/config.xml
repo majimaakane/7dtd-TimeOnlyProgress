@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TimeOnlyProgress>
+  <!--
+    speedMultiplier : 時間の進む速度倍率 (1.0 = 通常速度, 2.0 = 2倍速)
+    updateIntervalSeconds : 時間を更新する間隔（秒）
+  -->
+  <TimeAdvancement speedMultiplier="1.0" updateIntervalSeconds="1.0" />
+</TimeOnlyProgress>

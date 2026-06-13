@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ModInfo>
+	<Name value="TimeOnlyProgress" />
+	<DisplayName value="Time Only Progress" />
+	<Version value="1.0.1" />
+	<Description value="プレイヤー不在時にワールドの時間のみ進める軽量版モッド。設定ファイルで速度倍率を調整可能。" />
+	<Author value="" />
+	<Website value="" />
+</ModInfo>
