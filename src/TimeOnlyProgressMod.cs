@@ -3,7 +3,7 @@ using System.IO;
 using System.Xml;
 
 /// <summary>
-/// 7 Days to Die サーバーモッド: 時間経過のみ v1.0.1
+/// 7 Days to Die サーバーモッド: 時間経過のみ v1.0.2
 ///
 /// プレイヤーが誰もログインしていない間もゲーム内時間を進め続ける軽量版。
 /// タイルエンティティ（作業台・炉等）のシミュレーションは行わない。
@@ -48,16 +48,26 @@ public class TimeOnlyProgressMod : IModApi
             if (node != null)
             {
                 if (node.Attributes["speedMultiplier"] != null)
-                    float.TryParse(node.Attributes["speedMultiplier"].Value,
-                        System.Globalization.NumberStyles.Float,
-                        System.Globalization.CultureInfo.InvariantCulture,
-                        out speedMultiplier);
+                {
+                    if (float.TryParse(node.Attributes["speedMultiplier"].Value,
+                            System.Globalization.NumberStyles.Float,
+                            System.Globalization.CultureInfo.InvariantCulture,
+                            out float parsedSpeed))
+                        speedMultiplier = parsedSpeed;
+                    else
+                        Log.Warning($"{LOG_TAG} config.xml: speedMultiplier の値が不正です。デフォルト値 {speedMultiplier} を使用します。");
+                }
 
                 if (node.Attributes["updateIntervalSeconds"] != null)
-                    float.TryParse(node.Attributes["updateIntervalSeconds"].Value,
-                        System.Globalization.NumberStyles.Float,
-                        System.Globalization.CultureInfo.InvariantCulture,
-                        out updateIntervalSeconds);
+                {
+                    if (float.TryParse(node.Attributes["updateIntervalSeconds"].Value,
+                            System.Globalization.NumberStyles.Float,
+                            System.Globalization.CultureInfo.InvariantCulture,
+                            out float parsedInterval))
+                        updateIntervalSeconds = parsedInterval;
+                    else
+                        Log.Warning($"{LOG_TAG} config.xml: updateIntervalSeconds の値が不正です。デフォルト値 {updateIntervalSeconds} を使用します。");
+                }
             }
 
             if (speedMultiplier < 0.01f) speedMultiplier = 0.01f;
